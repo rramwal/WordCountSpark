@@ -59,11 +59,9 @@ public class SparkWordCount {
                 return integer + integer2;
             }
         });
-        ////print the output
-        for (Tuple2<String, Integer> words : wordCount.collect()) {
-            System.out.println(words);
 
-        }
+        wordCount.repartition(1).sortByKey().saveAsTextFile("/Users/rramwal/gitdev/WordCountSpark/src/main/resources/wordCount_output");
+        sparkContext.close();
 
 
     }
